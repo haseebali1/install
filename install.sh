@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dotfiles_location=~/Desktop/dotfiles
-
+backup_location_if_file_or_directory_exists=~/Desktop/links/backup
 location_for_link=~/Desktop/links
 location_for_compton_link=~/Desktop/links/.config
 location_for_i3_link=~/Desktop/links/.config/i3wm
@@ -13,6 +13,12 @@ create_directories()
     then
         mkdir "$dotfiles_location"
         echo creating "$dotfiles_location"
+    fi
+
+    if [ ! -d "$backup_location_if_file_or_directory_exists" ]
+    then
+        mkdir "$backup_location_if_file_or_directory_exists"
+        echo creating "$backup_location_if_file_or_directory_exists"
     fi
 
     if [ ! -d "$location_for_compton_link" ]
@@ -48,6 +54,13 @@ create_links()
                 # if the directory is .vim create the link without going into the directory
                 if [ "$input" = ".vim" ]
                 then
+                    # check if the .vim file already exists in the location or not.
+                    # if it does move it to backup
+                    if [ -d "${location_for_link}/${input}" ]
+                    then
+                        mv "${location_for_link}/${input}" "$backup_location_if_file_or_directory_exists"
+                        echo "$input" already exists moving to "$backup_location_if_file_or_directory_exists"
+                    fi
                     echo found .vim
                     #`ln -sf "${1}/$input" $location_for_link`
                     # otherwise if the input is a directory do the process again
@@ -63,20 +76,47 @@ create_links()
                 #check if the path has i3wm to create the link in the i3wm link
                 if [[ "$1" == *i3wm* ]]
                 then
+                    #make sure the i3 config file does not already exist otherwise move it to backup
+                    if [ -f "${location_for_i3_link}/${input}" ]
+                    then
+                        mv "$location_for_i3_link" "$backup_location_if_file_or_directory_exists"
+                        echo "$location_for_i3_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
+                    fi
+
                     echo found i3wm
                     #`ln -sf "${1}/$input" $location_for_i3_link`
                 #check if the path has i3status to create the link in the 13status link
                 elif [[ "$1" == *"i3status"* ]]
                 then
+                    #make sure the i3status config file does not already exist otherwise move it to backup
+                    if [ -f "${location_for_i3status_link}/${input}" ]
+                    then
+                        mv "$location_for_i3status_link" "$backup_location_if_file_or_directory_exists"
+                        echo "$location_for_i3status_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
+                    fi
+
                     echo found i3status
                     #`ln -sf "${1}/$input" $location_for_i3status_link`
                 # check if the file is compton.conf and link it to where it goes
                 elif [ "$input" == "compton.conf" ]
                 then
+                    #make sure the compton config file does not already exist otherwise move it to backup
+                    if [ -f "${location_for_compton_link}/${input}" ]
+                    then
+                        mv "${location_for_compton_link}/${input}" "$backup_location_if_file_or_directory_exists"
+                        echo "${location_for_compton_link}/${input}" already exists. moving to "$backup_location_if_file_or_directory_exists"
+                    fi
                     echo found compton.conf
                     #`ln -sf "${1}/$input" $location_for_compton_link`
                 #otherwise link it to the normal location
                 else
+                    #make sure the file does not already exist otherwise move it to backup
+                    #.bash_aliases .bashrc .vimrc
+                    if [ -f "${location_for_link}/${input}" ]
+                    then
+                        mv "${location_for_link}/${input}" "$backup_location_if_file_or_directory_exists"
+                        echo "${location_for_link}/${input}" already exists. moving to "$backup_location_if_file_or_directory_exists"
+                    fi
                     echo "$input"
                     #`ln -sf "${1}/$input" $location_for_link`
                 fi
