@@ -1,11 +1,17 @@
 #!/bin/bash
 
-dotfiles_location=~/Desktop/dotfiles
-backup_location_if_file_or_directory_exists=~/Desktop/links/backup
-location_for_link=~/Desktop/links
-location_for_compton_link=~/Desktop/links/.config
-location_for_i3_link=~/Desktop/links/.config/i3wm
-location_for_i3status_link=~/Desktop/links/.config/i3status
+dotfiles_location=~/.dotfiles
+backup_location_if_file_or_directory_exists=~/.backup
+location_for_link=~
+location_for_compton_link=~/.config
+location_for_i3_link=~/.config/i3wm
+location_for_i3status_link=~/.config/i3status
+wallpaper=~/Pictures
+
+install_program()
+{
+    pacman -S i3-wm i3status dmenu vlc firefox tor libreoffice-fresh clamav ttf-font-awesome
+}
 
 create_directories()
 {
@@ -38,6 +44,12 @@ create_directories()
         mkdir "$location_for_i3status_link"
         echo creating "$location_for_i3status_link"
     fi
+
+    if [ ! -d "$wallpaper" ]
+    then
+        mkdir "$wallpaper"
+        echo creating "$wallpaper"
+    fi
 }
 
 create_links()
@@ -61,8 +73,8 @@ create_links()
                         mv "${location_for_link}/${input}" "$backup_location_if_file_or_directory_exists"
                         echo "$input" already exists moving to "$backup_location_if_file_or_directory_exists"
                     fi
-                    echo found .vim
-                    #`ln -sf "${1}/$input" $location_for_link`
+                    #echo found .vim
+                    `ln -sf "${1}/$input" $location_for_link`
                     # otherwise if the input is a directory do the process again
                 else
                     create_links "${1}/$input"
@@ -83,8 +95,8 @@ create_links()
                         echo "$location_for_i3_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
                     fi
 
-                    echo found i3wm
-                    #`ln -sf "${1}/$input" $location_for_i3_link`
+                    #echo found i3wm
+                    `ln -sf "${1}/$input" $location_for_i3_link`
                 #check if the path has i3status to create the link in the 13status link
                 elif [[ "$1" == *"i3status"* ]]
                 then
@@ -95,8 +107,8 @@ create_links()
                         echo "$location_for_i3status_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
                     fi
 
-                    echo found i3status
-                    #`ln -sf "${1}/$input" $location_for_i3status_link`
+                    #echo found i3status
+                    `ln -sf "${1}/$input" $location_for_i3status_link`
                 # check if the file is compton.conf and link it to where it goes
                 elif [ "$input" == "compton.conf" ]
                 then
@@ -106,8 +118,8 @@ create_links()
                         mv "${location_for_compton_link}/${input}" "$backup_location_if_file_or_directory_exists"
                         echo "${location_for_compton_link}/${input}" already exists. moving to "$backup_location_if_file_or_directory_exists"
                     fi
-                    echo found compton.conf
-                    #`ln -sf "${1}/$input" $location_for_compton_link`
+                    #echo found compton.conf
+                    `ln -sf "${1}/$input" $location_for_compton_link`
                 #otherwise link it to the normal location
                 else
                     #make sure the file does not already exist otherwise move it to backup
@@ -117,20 +129,24 @@ create_links()
                         mv "${location_for_link}/${input}" "$backup_location_if_file_or_directory_exists"
                         echo "${location_for_link}/${input}" already exists. moving to "$backup_location_if_file_or_directory_exists"
                     fi
-                    echo "$input"
-                    #`ln -sf "${1}/$input" $location_for_link`
+                    #echo "$input"
+                    `ln -sf "${1}/$input" $location_for_link`
                 fi
             fi
         fi
     done
 }
 
+install_program
+
 # create all the necessary directories first
 create_directories
 
+git clone https://github.com/haseebali1/Wallpaper "$wallpaper"
+
 git clone https://github.com/haseebali1/dotfiles "$dotfiles_location"
 
-#start the link creating function. remove the / from the input
-# $1 is the path given to the program where the dotfiles are located
+#start the link creating function.
+# $dotfiles_location is the path given to the program where the dotfiles are located
 create_links "$dotfiles_location"
 
