@@ -4,7 +4,7 @@ dotfiles_location=~/.dotfiles
 backup_location_if_file_or_directory_exists=~/.backup
 location_for_link=~
 location_for_compton_link=~/.config
-location_for_i3_link=~/.config/i3wm
+location_for_i3_link=~/.config/i3
 location_for_i3status_link=~/.config/i3status
 wallpaper=~/Pictures
 
