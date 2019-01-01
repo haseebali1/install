@@ -10,7 +10,7 @@ wallpaper=~/Pictures
 
 install_program()
 {
-    pacman -S i3-wm i3status dmenu vlc firefox tor libreoffice-fresh clamav ttf-font-awesome feh compton
+    pacman -S i3-wm i3status dmenu vlc firefox tor libreoffice-fresh clamav ttf-font-awesome feh compton flashplugin vim
 }
 
 create_directories()
