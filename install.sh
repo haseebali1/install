@@ -10,7 +10,7 @@ wallpaper=~/Pictures
 
 install_program()
 {
-    sudo pacman -S i3-wm i3status dmenu vlc firefox tor libreoffice-fresh clamav ttf-font-awesome feh compton flashplugin vim pulseaudio pulseaudio-alsa xorg xorg-xinit polybar
+    sudo pacman -S i3-wm i3status dmenu vlc firefox tor libreoffice-fresh clamav ttf-font-awesome feh compton flashplugin vim pulseaudio pulseaudio-alsa xorg xorg-xinit rxvt-unicode
 }
 
 create_directories()
@@ -151,5 +151,5 @@ git clone https://github.com/haseebali1/dotfiles "$dotfiles_location"
 create_links "$dotfiles_location"
 
 touch ~/.xinitrc
-echo exec i3 >> ~/.xinitrc
+echo exec i3 > ~/.xinitrc
 
