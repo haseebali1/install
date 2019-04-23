@@ -10,7 +10,7 @@ wallpaper=~/Pictures
 
 install_program()
 {
-    sudo pacman -S i3-wm i3status dmenu vlc firefox tor libreoffice-fresh clamav ttf-font-awesome feh compton flashplugin vim pulseaudio pulseaudio-alsa xorg xorg-xinit rxvt-unicode
+    sudo pacman -S i3-wm i3status dmenu vlc firefox tor libreoffice-fresh clamav feh compton flashplugin vim pulseaudio pulseaudio-alsa xorg xorg-xinit rxvt-unicode dunst libnotify noto-fonts-emoji numlockx networkmanager network-manager-applet i3lock curl
 }
 
 create_directories()
