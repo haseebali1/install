@@ -4,8 +4,8 @@ dotfiles_location=$HOME/.dotfiles
 backup_location_if_file_or_directory_exists=$HOME/.backup
 location_for_link=$HOME
 location_for_compton_link=$HOME/.config
-location_for_i3_link=$HOME/.config/i3
-location_for_i3status_link=$HOME/.config/i3status
+#location_for_i3_link=$HOME/.config/i3
+#location_for_i3status_link=$HOME/.config/i3status
 wallpaper=$HOME/Pictures
 
 install_program()
@@ -33,17 +33,17 @@ create_directories()
         echo creating "$location_for_compton_link"
     fi
 
-    if [ ! -d "$location_for_i3_link" ]
-    then
-        mkdir "$location_for_i3_link"
-        echo creating "$location_for_i3_link"
-    fi
+    #if [ ! -d "$location_for_i3_link" ]
+    #then
+    #    mkdir "$location_for_i3_link"
+    #    echo creating "$location_for_i3_link"
+    #fi
 
-    if [ ! -d "$location_for_i3status_link" ]
-    then
-        mkdir "$location_for_i3status_link"
-        echo creating "$location_for_i3status_link"
-    fi
+    #if [ ! -d "$location_for_i3status_link" ]
+    #then
+    #    mkdir "$location_for_i3status_link"
+    #    echo creating "$location_for_i3status_link"
+    #fi
 
     if [ ! -d "$wallpaper" ]
     then
@@ -86,31 +86,31 @@ create_links()
             if [ "$input" != ".gitignore" -a "$input" != "README.md" ]
             then 
                 #check if the path has i3wm to create the link in the i3wm link
-                if [[ "$1" == *i3wm* ]]
-                then
-                    #make sure the i3 config file does not already exist otherwise move it to backup
-                    if [ -f "${location_for_i3_link}/${input}" ]
-                    then
-                        mv "$location_for_i3_link" "$backup_location_if_file_or_directory_exists"
-                        echo "$location_for_i3_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
-                    fi
+                #if [[ "$1" == *i3wm* ]]
+                #then
+                #    #make sure the i3 config file does not already exist otherwise move it to backup
+                #    if [ -f "${location_for_i3_link}/${input}" ]
+                #    then
+                #        mv "$location_for_i3_link" "$backup_location_if_file_or_directory_exists"
+                #        echo "$location_for_i3_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
+                #    fi
 
-                    #echo found i3wm
-                    `ln -sf "${1}/$input" $location_for_i3_link`
-                #check if the path has i3status to create the link in the 13status link
-                elif [[ "$1" == *"i3status"* ]]
-                then
-                    #make sure the i3status config file does not already exist otherwise move it to backup
-                    if [ -f "${location_for_i3status_link}/${input}" ]
-                    then
-                        mv "$location_for_i3status_link" "$backup_location_if_file_or_directory_exists"
-                        echo "$location_for_i3status_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
-                    fi
+                #    #echo found i3wm
+                #    `ln -sf "${1}/$input" $location_for_i3_link`
+                ##check if the path has i3status to create the link in the 13status link
+                #elif [[ "$1" == *"i3status"* ]]
+                #then
+                #    #make sure the i3status config file does not already exist otherwise move it to backup
+                #    if [ -f "${location_for_i3status_link}/${input}" ]
+                #    then
+                #        mv "$location_for_i3status_link" "$backup_location_if_file_or_directory_exists"
+                #        echo "$location_for_i3status_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
+                #    fi
 
-                    #echo found i3status
-                    `ln -sf "${1}/$input" $location_for_i3status_link`
-                # check if the file is compton.conf and link it to where it goes
-                elif [ "$input" == "compton.conf" ]
+                #    #echo found i3status
+                #    `ln -sf "${1}/$input" $location_for_i3status_link`
+                ## check if the file is compton.conf and link it to where it goes
+                if [ "$input" == "compton.conf" ]
                 then
                     #make sure the compton config file does not already exist otherwise move it to backup
                     if [ -f "${location_for_compton_link}/${input}" ]
@@ -142,16 +142,22 @@ install_program
 # create all the necessary directories first
 create_directories
 
-git clone https://github.com/haseebali1/Wallpaper "$wallpaper"
+cd
 
-git clone https://github.com/haseebali1/dotfiles "$dotfiles_location"
+git clone https://github.com/haseebali1/Wallpaper.git "$wallpaper"
+
+git clone https://github.com/haseebali1/dotfiles.git "$dotfiles_location"
+
+git clone https://github.com/haseebali1/dwm.git
+
+git clone https://github.com/haseebali1/st.git
 
 #start the link creating function.
 # $dotfiles_location is the path given to the program where the dotfiles are located
 create_links "$dotfiles_location"
 
-touch ~/.xinitrc
-echo "numlockx &" > $HOME/.xinitrc
-echo "dunst &" >> $HOME/.xinitrc
-echo "compton --config $HOME/compton.conf  &" >> $HOME/.xinitrc
-echo "exec i3" >> ~/.xinitrc
+#touch ~/.xinitrc
+#echo "numlockx &" > $HOME/.xinitrc
+#echo "dunst &" >> $HOME/.xinitrc
+#echo "compton --config $HOME/compton.conf  &" >> $HOME/.xinitrc
+#echo "exec i3" >> ~/.xinitrc
