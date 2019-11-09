@@ -1,16 +1,16 @@
 #!/bin/bash
 
-dotfiles_location=~/.dotfiles
-backup_location_if_file_or_directory_exists=~/.backup
-location_for_link=~
-location_for_compton_link=~/.config
-location_for_i3_link=~/.config/i3
-location_for_i3status_link=~/.config/i3status
-wallpaper=~/Pictures
+dotfiles_location=$HOME/.dotfiles
+backup_location_if_file_or_directory_exists=$HOME/.backup
+location_for_link=$HOME
+location_for_compton_link=$HOME/.config
+location_for_i3_link=$HOME/.config/i3
+location_for_i3status_link=$HOME/.config/i3status
+wallpaper=$HOME/Pictures
 
 install_program()
 {
-    sudo pacman -S i3-wm i3status dmenu vlc firefox tor libreoffice-fresh clamav feh compton flashplugin gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie deja-dup graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils cmatrix htop scrot chromium light zathura zathura-pdf-mupdf
+    sudo pacman -S dwm dmenu vlc firefox tor libreoffice-fresh clamav feh compton flashplugin gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie deja-dup graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils cmatrix htop scrot chromium light zathura zathura-pdf-mupdf
 }
 
 create_directories()
@@ -151,5 +151,7 @@ git clone https://github.com/haseebali1/dotfiles "$dotfiles_location"
 create_links "$dotfiles_location"
 
 touch ~/.xinitrc
-echo exec i3 > ~/.xinitrc
-
+echo "numlockx &" > $HOME/.xinitrc
+echo "dunst &" >> $HOME/.xinitrc
+echo "compton --config $HOME/compton.conf  &" >> $HOME/.xinitrc
+echo "exec i3" >> ~/.xinitrc
