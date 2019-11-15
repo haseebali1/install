@@ -61,7 +61,7 @@ create_links()
         if [ -d "${1}/$input" ]
         then
             #if the directory is .git do nothing
-            if [ "$input" != ".git" ]
+            if [ "$input" != ".git"] && [  "$input" != "scripts"]
             then
                 # if the directory is .vim create the link without going into the directory
                 if [ "$input" = ".vim" ]
