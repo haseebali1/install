@@ -61,7 +61,7 @@ create_links()
         if [ -d "${1}/$input" ]
         then
             #if the directory is .git do nothing
-            if [ "$input" != ".git"] && [  "$input" != "scripts"]
+            if [ "$input" != ".git" ] && [  "$input" != "scripts" ]
             then
                 # if the directory is .vim create the link without going into the directory
                 if [ "$input" = ".vim" ]
@@ -83,7 +83,7 @@ create_links()
         # else the input is a file
         else
             # ignore the .gitignore and the README.md file
-            if [ "$input" != ".gitignore" -a "$input" != "README.md" ]
+            if [ "$input" != ".gitignore" -a "$input" != "README.md" -a "$input" != ".bash_aliases" ]
             then 
                 #check if the path has i3wm to create the link in the i3wm link
                 #if [[ "$1" == *i3wm* ]]
