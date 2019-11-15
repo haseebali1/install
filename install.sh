@@ -148,16 +148,23 @@ git clone https://github.com/haseebali1/Wallpaper.git "$wallpaper"
 
 git clone https://github.com/haseebali1/dotfiles.git "$dotfiles_location"
 
-git clone https://github.com/haseebali1/dwm.git
-
-git clone https://github.com/haseebali1/st.git
-
 #start the link creating function.
 # $dotfiles_location is the path given to the program where the dotfiles are located
 create_links "$dotfiles_location"
 
-#touch ~/.xinitrc
-#echo "numlockx &" > $HOME/.xinitrc
-#echo "dunst &" >> $HOME/.xinitrc
-#echo "compton --config $HOME/compton.conf  &" >> $HOME/.xinitrc
-#echo "exec i3" >> ~/.xinitrc
+git clone https://github.com/haseebali1/dwm.git
+
+cd $HOME/dwm
+sudo make clean install
+cd
+
+git clone https://github.com/haseebali1/st.git
+
+cd $HOME/st
+sudo make clean install
+cd
+
+sudo cp $HOME/.dotfiles/scripts/dwmbar.sh /usr/local/bin/dwmbar
+sudo cp $HOME/.dotfiles/scripts/refbar.sh /usr/local/bin/refbar
+
+reboot
