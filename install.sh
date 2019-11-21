@@ -10,7 +10,7 @@ wallpaper=$HOME/Pictures
 
 install_program()
 {
-    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh compton gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot light zathura zathura-pdf-mupdf
+    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot light zathura zathura-pdf-mupdf
 }
 
 create_directories()
@@ -110,7 +110,7 @@ create_links()
                 #    #echo found i3status
                 #    `ln -sf "${1}/$input" $location_for_i3status_link`
                 ## check if the file is compton.conf and link it to where it goes
-                if [ "$input" == "compton.conf" ]
+                if [ "$input" == "picom.conf" ]
                 then
                     #make sure the compton config file does not already exist otherwise move it to backup
                     if [ -f "${location_for_compton_link}/${input}" ]
