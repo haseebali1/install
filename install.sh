@@ -152,6 +152,8 @@ git clone https://github.com/haseebali1/dotfiles.git "$dotfiles_location"
 # $dotfiles_location is the path given to the program where the dotfiles are located
 create_links "$dotfiles_location"
 
+#get dwm from github
+
 git clone https://github.com/haseebali1/dwm.git
 
 cd $HOME/dwm
