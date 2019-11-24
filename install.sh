@@ -3,7 +3,7 @@
 dotfiles_location=$HOME/.dotfiles
 backup_location_if_file_or_directory_exists=$HOME/.backup
 location_for_link=$HOME
-location_for_compton_link=$HOME/.config
+location_for_picom_link=$HOME/.config
 #location_for_i3_link=$HOME/.config/i3
 #location_for_i3status_link=$HOME/.config/i3status
 wallpaper=$HOME/Pictures
@@ -27,10 +27,10 @@ create_directories()
         echo creating "$backup_location_if_file_or_directory_exists"
     fi
 
-    if [ ! -d "$location_for_compton_link" ]
+    if [ ! -d "$location_for_picom_link" ]
     then
-        mkdir "$location_for_compton_link"
-        echo creating "$location_for_compton_link"
+        mkdir "$location_for_picom_link"
+        echo creating "$location_for_picom_link"
     fi
 
     #if [ ! -d "$location_for_i3_link" ]
@@ -83,7 +83,7 @@ create_links()
         # else the input is a file
         else
             # ignore the .gitignore and the README.md file
-            if [ "$input" != ".gitignore" -a "$input" != "README.md" -a "$input" != ".bash_aliases" ]
+            if [ "$input" != ".gitignore" -a "$input" != "README.md" -a "$input" != ".bash_aliases" -a "$input" != "config" ]
             then 
                 #check if the path has i3wm to create the link in the i3wm link
                 #if [[ "$1" == *i3wm* ]]
@@ -109,17 +109,17 @@ create_links()
 
                 #    #echo found i3status
                 #    `ln -sf "${1}/$input" $location_for_i3status_link`
-                ## check if the file is compton.conf and link it to where it goes
+                ## check if the file is picom.conf and link it to where it goes
                 if [ "$input" == "picom.conf" ]
                 then
-                    #make sure the compton config file does not already exist otherwise move it to backup
-                    if [ -f "${location_for_compton_link}/${input}" ]
+                    #make sure the picom config file does not already exist otherwise move it to backup
+                    if [ -f "${location_for_picom_link}/${input}" ]
                     then
-                        mv "${location_for_compton_link}/${input}" "$backup_location_if_file_or_directory_exists"
-                        echo "${location_for_compton_link}/${input}" already exists. moving to "$backup_location_if_file_or_directory_exists"
+                        mv "${location_for_picom_link}/${input}" "$backup_location_if_file_or_directory_exists"
+                        echo "${location_for_picom_link}/${input}" already exists. moving to "$backup_location_if_file_or_directory_exists"
                     fi
-                    #echo found compton.conf
-                    `ln -sf "${1}/$input" $location_for_compton_link`
+                    #echo found picom.conf
+                    `ln -sf "${1}/$input" $location_for_picom_link`
                 #otherwise link it to the normal location
                 else
                     #make sure the file does not already exist otherwise move it to backup
