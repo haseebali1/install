@@ -10,7 +10,7 @@ wallpaper=$HOME/Pictures
 
 install_program()
 {
-    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot light zathura zathura-pdf-mupdf xclip
+    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot light zathura zathura-pdf-mupdf xclip openssh
 }
 
 create_directories()
