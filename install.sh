@@ -8,11 +8,13 @@ location_for_picom_link=$HOME/.config
 #location_for_i3status_link=$HOME/.config/i3status
 wallpaper=$HOME/Pictures
 
+#packages to be installed
 install_program()
 {
     sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot light zathura zathura-pdf-mupdf xclip openssh
 }
 
+#create the necessary directories for where the files will go
 create_directories()
 {
     if [ ! -d "$dotfiles_location" ]
@@ -171,5 +173,7 @@ cd
 #add dwmbar and refbar to bin to execute from anywhere
 sudo cp $HOME/.dotfiles/scripts/dwmbar.sh /usr/local/bin/dwmbar
 sudo cp $HOME/.dotfiles/scripts/refbar.sh /usr/local/bin/refbar
+
+#restart for changes to take place
 
 reboot
