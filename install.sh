@@ -11,7 +11,7 @@ wallpaper=$HOME/Pictures
 #packages to be installed
 install_program()
 {
-    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot light zathura zathura-pdf-mupdf xclip openssh
+    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin composer ranger transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot light zathura zathura-pdf-mupdf xclip openssh python2-pip
 }
 
 #create the necessary directories for where the files will go
@@ -167,6 +167,13 @@ cd
 git clone https://github.com/haseebali1/st.git
 
 cd $HOME/st
+sudo make clean install
+cd
+
+#get dmenu from github
+git clone https://github.com/haseebali1/dmenu.git
+
+cd $HOME/dmenu
 sudo make clean install
 cd
 
