@@ -44,7 +44,7 @@ create_links()
             #if the directory is .git do nothing
             if [ "$input" != ".git" ] && [  "$input" != "scripts" ]
             then
-                # if the directory is .vim create the link without going into the directory
+                # if the directory is .vim or .config create the link without going into the directory
                 if [ "$input" = ".vim" ] || [ "$input" = ".config" ]
                 then
                     # check if the .vim file already exists in the location or not.
@@ -113,6 +113,14 @@ git clone https://github.com/haseebali1/dmenu.git
 cd $HOME/dmenu
 sudo make clean install
 cd
+
+#get yay
+https://github.com/Jguer/yay.git
+cd $HOME/yay
+makepkg -si
+cd
+
+yay -S vifm-git python-ueberzug-git tor-browser simple-mtpfs transmission-remote-cli-git minecraft-launcher
 
 #restart for changes to take place
 
