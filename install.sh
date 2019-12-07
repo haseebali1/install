@@ -114,10 +114,6 @@ cd $HOME/dmenu
 sudo make clean install
 cd
 
-#add dwmbar and refbar to bin to execute from anywhere
-sudo cp $HOME/.dotfiles/scripts/dwmbar.sh /usr/local/bin/dwmbar
-sudo cp $HOME/.dotfiles/scripts/refbar.sh /usr/local/bin/refbar
-
 #restart for changes to take place
 
 reboot
