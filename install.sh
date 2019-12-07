@@ -3,9 +3,6 @@
 dotfiles_location=$HOME/.dotfiles
 backup_location_if_file_or_directory_exists=$HOME/.backup
 location_for_link=$HOME
-#location_for_picom_link=$HOME/.config
-#location_for_i3_link=$HOME/.config/i3
-#location_for_i3status_link=$HOME/.config/i3status
 wallpaper=$HOME/Pictures
 
 #packages to be installed
@@ -29,24 +26,6 @@ create_directories()
         echo creating "$backup_location_if_file_or_directory_exists"
     fi
 
-    #if [ ! -d "$location_for_picom_link" ]
-    #then
-    #    mkdir "$location_for_picom_link"
-    #    echo creating "$location_for_picom_link"
-    #fi
-
-    #if [ ! -d "$location_for_i3_link" ]
-    #then
-    #    mkdir "$location_for_i3_link"
-    #    echo creating "$location_for_i3_link"
-    #fi
-
-    #if [ ! -d "$location_for_i3status_link" ]
-    #then
-    #    mkdir "$location_for_i3status_link"
-    #    echo creating "$location_for_i3status_link"
-    #fi
-
     if [ ! -d "$wallpaper" ]
     then
         mkdir "$wallpaper"
@@ -56,7 +35,6 @@ create_directories()
 
 create_links()
 {
-    #find $1 -maxdepth 1 \( -path $1/README.md -o -path $1/.git -o -path $1/.gitignore -o -path $1/scripts \) -prune -o -not -path . -exec basename {} \;
     # ls -A to also get the hidden files but ignore . and ..
     for input in `ls -A -1 $1`
     do
@@ -67,7 +45,7 @@ create_links()
             if [ "$input" != ".git" ] && [  "$input" != "scripts" ]
             then
                 # if the directory is .vim create the link without going into the directory
-                if [ "$input" = ".vim" ]
+                if [ "$input" = ".vim" ] || [ "$input" = ".config" ]
                 then
                     # check if the .vim file already exists in the location or not.
                     # if it does move it to backup
@@ -78,20 +56,20 @@ create_links()
                     fi
                     #echo found .vim
                     `ln -sf "${1}/$input" $location_for_link`
-                elif [ "$input" = ".config" ]
-                then
-                    # check if the .vim file already exists in the location or not.
-                    # if it does move it to backup
-                    if [ -d "${location_for_link}/${input}" ]
-                    then
-                        mv "${location_for_link}/${input}" "$backup_location_if_file_or_directory_exists"
-                        echo "$input" already exists moving to "$backup_location_if_file_or_directory_exists"
-                    fi
-                    #echo found .vim
-                    `ln -sf "${1}/$input" $location_for_link`
+                #elif [ "$input" = ".config" ]
+                #then
+                #    # check if the .vim file already exists in the location or not.
+                #    # if it does move it to backup
+                #    if [ -d "${location_for_link}/${input}" ]
+                #    then
+                #        mv "${location_for_link}/${input}" "$backup_location_if_file_or_directory_exists"
+                #        echo "$input" already exists moving to "$backup_location_if_file_or_directory_exists"
+                #    fi
+                #    #echo found .vim
+                #    `ln -sf "${1}/$input" $location_for_link`
                     # otherwise if the input is a directory do the process again
-                else
-                    create_links "${1}/$input"
+                #else
+                #    create_links "${1}/$input"
             fi
         fi
         # else the input is a file
@@ -99,45 +77,6 @@ create_links()
             # ignore the .gitignore and the README.md file
             if [ "$input" != ".gitignore" -a "$input" != "README.md" -a "$input" != ".bash_aliases" ]
             then
-                #check if the path has i3wm to create the link in the i3wm link
-                #if [[ "$1" == *i3wm* ]]
-                #then
-                #    #make sure the i3 config file does not already exist otherwise move it to backup
-                #    if [ -f "${location_for_i3_link}/${input}" ]
-                #    then
-                #        mv "$location_for_i3_link" "$backup_location_if_file_or_directory_exists"
-                #        echo "$location_for_i3_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
-                #    fi
-
-                #    #echo found i3wm
-                #    `ln -sf "${1}/$input" $location_for_i3_link`
-                ##check if the path has i3status to create the link in the 13status link
-                #elif [[ "$1" == *"i3status"* ]]
-                #then
-                #    #make sure the i3status config file does not already exist otherwise move it to backup
-                #    if [ -f "${location_for_i3status_link}/${input}" ]
-                #    then
-                #        mv "$location_for_i3status_link" "$backup_location_if_file_or_directory_exists"
-                #        echo "$location_for_i3status_link" already exists. moving to "$backup_location_if_file_or_directory_exists"
-                #    fi
-
-                #    #echo found i3status
-                #    `ln -sf "${1}/$input" $location_for_i3status_link`
-                ## check if the file is picom.conf and link it to where it goes
-                #if [ "$input" == "picom.conf" ]
-                #then
-                #    #make sure the picom config file does not already exist otherwise move it to backup
-                #    if [ -f "${location_for_picom_link}/${input}" ]
-                #    then
-                #        mv "${location_for_picom_link}/${input}" "$backup_location_if_file_or_directory_exists"
-                #        echo "${location_for_picom_link}/${input}" already exists. moving to "$backup_location_if_file_or_directory_exists"
-                #    fi
-                #    #echo found picom.conf
-                #    `ln -sf "${1}/$input" $location_for_picom_link`
-                #otherwise link it to the normal location
-                #else
-                    #make sure the file does not already exist otherwise move it to backup
-                    #.bash_aliases .bashrc .vimrc
                     if [ -f "${location_for_link}/${input}" ]
                     then
                         mv "${location_for_link}/${input}" "$backup_location_if_file_or_directory_exists"
