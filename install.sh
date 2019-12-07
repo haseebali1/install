@@ -56,20 +56,6 @@ create_links()
                     fi
                     #echo found .vim
                     `ln -sf "${1}/$input" $location_for_link`
-                #elif [ "$input" = ".config" ]
-                #then
-                #    # check if the .vim file already exists in the location or not.
-                #    # if it does move it to backup
-                #    if [ -d "${location_for_link}/${input}" ]
-                #    then
-                #        mv "${location_for_link}/${input}" "$backup_location_if_file_or_directory_exists"
-                #        echo "$input" already exists moving to "$backup_location_if_file_or_directory_exists"
-                #    fi
-                #    #echo found .vim
-                #    `ln -sf "${1}/$input" $location_for_link`
-                    # otherwise if the input is a directory do the process again
-                #else
-                #    create_links "${1}/$input"
             fi
         fi
         # else the input is a file
