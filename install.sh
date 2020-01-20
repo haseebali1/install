@@ -4,11 +4,12 @@ dotfiles_location=$HOME/.dotfiles
 backup_location_if_file_or_directory_exists=$HOME/.backup
 location_for_link=$HOME
 wallpaper=$HOME/Pictures
+suckless_location=$HOME/.dotfiles/suckless
 
 #packages to be installed
 install_program()
 {
-    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools
+    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp dwm bspwm polybar
 }
 
 #create the necessary directories for where the files will go
@@ -42,7 +43,7 @@ create_links()
         if [ -d "${1}/$input" ]
         then
             #if the directory is .git do nothing
-            if [ "$input" != ".git" ] && [  "$input" != "scripts" ]
+            if [ "$input" != ".git" ] && [  "$input" != "scripts" ] && [ "$input" != "firefox" ] && [ "$input" != "vlc" ] && [ "input" != "suckless" ]
             then
                 # if the directory is .vim or .config create the link without going into the directory
                 if [ "$input" = ".vim" ] || [ "$input" = ".config" ]
@@ -91,26 +92,19 @@ git clone https://github.com/haseebali1/dotfiles.git "$dotfiles_location"
 # $dotfiles_location is the path given to the program where the dotfiles are located
 create_links "$dotfiles_location"
 
-#get dwm from github
 
-git clone https://github.com/haseebali1/dwm.git
-
-cd $HOME/dwm
+cd $suckless_location/dwm
 sudo make clean install
 cd
 
 #get st from github
 
-git clone https://github.com/haseebali1/st.git
-
-cd $HOME/st
+cd $suckless_location/st
 sudo make clean install
 cd
 
 #get dmenu from github
-git clone https://github.com/haseebali1/dmenu.git
-
-cd $HOME/dmenu
+cd $suckless_location/dmenu
 sudo make clean install
 cd
 
@@ -120,7 +114,7 @@ cd $HOME/yay
 makepkg -si
 cd
 
-yay -S vifm-git python-ueberzug-git tor-browser simple-mtpfs transmission-remote-cli-git minecraft-launcher
+yay -S vifm-git python-ueberzug-git tor-browser simple-mtpfs minecraft-launcher
 
 #restart for changes to take place
 
