@@ -114,7 +114,13 @@ cd $HOME/yay
 makepkg -si
 cd
 
-yay -S vifm-git python-ueberzug-git tor-browser simple-mtpfs minecraft-launcher
+yay -S vifm-git python-ueberzug-git tor-browser simple-mtpfs brave-bin android-studio android-studio android-sdk-build-tools android-sdk-platfrom-tools android-platform
+
+sudo groupadd android-sdk
+sudo gpasswd -a $USER android-sdk
+
+sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
+sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
 
 #restart for changes to take place
 
