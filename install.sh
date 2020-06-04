@@ -9,7 +9,7 @@ suckless_location=$HOME/.dotfiles/suckless
 #packages to be installed
 install_program()
 {
-    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet i3lock curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp dwm bspwm polybar youtube-dl
+    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom gvim pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify otf-font-awesome numlockx networkmanager network-manager-applet curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp polybar youtube-dl scrot i3lock imagemagick
 }
 
 #create the necessary directories for where the files will go
@@ -92,6 +92,15 @@ git clone https://github.com/haseebali1/dotfiles.git "$dotfiles_location"
 # $dotfiles_location is the path given to the program where the dotfiles are located
 create_links "$dotfiles_location"
 
+cd
+
+#get yay
+git clone https://aur.archlinux.org/yay.git
+cd $HOME/yay
+makepkg -si
+cd
+
+yay -S dwm vifm-git python-ueberzug-git st tor-browser simple-mtpfs brave-bin scrcpy
 
 cd $suckless_location/dwm
 sudo make clean install
@@ -107,20 +116,6 @@ cd
 cd $suckless_location/dmenu
 sudo make clean install
 cd
-
-#get yay
-https://github.com/Jguer/yay.git
-cd $HOME/yay
-makepkg -si
-cd
-
-yay -S vifm-git python-ueberzug-git tor-browser simple-mtpfs brave-bin android-studio android-studio android-sdk-build-tools android-sdk-platfrom-tools android-platform
-
-sudo groupadd android-sdk
-sudo gpasswd -a $USER android-sdk
-
-sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk
-sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk
 
 #restart for changes to take place
 
