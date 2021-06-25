@@ -100,7 +100,7 @@ cd $HOME/yay
 makepkg -si
 cd
 
-yay -S dwm vifm-git python-ueberzug-git st tor-browser simple-mtpfs brave-bin scrcpy
+yay -S dwm vifm-git python-ueberzug-git st tor-browser simple-mtpfs brave-bin scrcpy brscan4
 
 cd $suckless_location/dwm
 sudo make clean install
