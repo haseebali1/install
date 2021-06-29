@@ -100,21 +100,30 @@ cd $HOME/yay
 makepkg -si
 cd
 
-yay -S dwm vifm-git python-ueberzug-git st tor-browser simple-mtpfs brave-bin scrcpy brscan4 neovim-nightly-bin
+yay -S dwm vifm-git python-ueberzug-git st tor-browser simple-mtpfs brave-bin scrcpy brscan4 neovim-nightly-bin polybar minecraft-launcher
 
 cd $suckless_location/dwm
-sudo make clean install
+sudo make install
+make clean
 cd
 
 #get st from github
 
 cd $suckless_location/st
-sudo make clean install
+sudo make install
+make clean
 cd
 
 #get dmenu from github
 cd $suckless_location/dmenu
-sudo make clean install
+sudo make install
+make clean
+cd
+
+# get dwmblocks
+cd $suckless_location/dwmblocks
+sudo make install
+make clean
 cd
 
 #restart for changes to take place
