@@ -9,7 +9,7 @@ suckless_location=$HOME/.dotfiles/suckless
 #packages to be installed
 install_program()
 {
-    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify ttf-font-awesome numlockx networkmanager network-manager-applet curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp youtube-dl scrot i3lock imagemagick wget
+    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify ttf-font-awesome numlockx networkmanager network-manager-applet curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp youtube-dl scrot i3lock imagemagick wget ttf-roboto
 }
 
 #create the necessary directories for where the files will go
