@@ -9,7 +9,7 @@ suckless_location=$HOME/.dotfiles/suckless
 #packages to be installed
 install_program()
 {
-    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify ttf-font-awesome numlockx networkmanager network-manager-applet curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp youtube-dl scrot i3lock imagemagick wget ttf-roboto sxhkd cups cups-pdf sane ttf-jetbrains-mono neovim
+    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify ttf-font-awesome numlockx networkmanager network-manager-applet curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp youtube-dl scrot i3lock imagemagick wget ttf-roboto sxhkd cups cups-pdf sane ttf-jetbrains-mono neovim hunspell hunspell-en_us hyphen hyphen-en libmythes mythes-en
 }
 
 #create the necessary directories for where the files will go
@@ -100,7 +100,7 @@ cd $HOME/yay
 makepkg -si
 cd
 
-yay -S dwm vifm-git python-ueberzug-git st simple-mtpfs brave-bin scrcpy brscan4 sane-airscan polybar minecraft-launcher
+yay -S dwm vifm-git python-ueberzug-git st simple-mtpfs brave-bin scrcpy brscan4 sane-airscan polybar minecraft-launcher libreoffice-extension-languagetool
 
 cd $suckless_location/dwm
 sudo make install
