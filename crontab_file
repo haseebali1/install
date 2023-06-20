@@ -1,0 +1,2 @@
+#update the mirrorlist weekly
+@weekly /usr/bin/reflector --latest 200 --sort rate --save /etc/pacman.d/mirrorlist

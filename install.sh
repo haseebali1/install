@@ -5,11 +5,12 @@ backup_location_if_file_or_directory_exists=$HOME/.backup
 location_for_link=$HOME
 wallpaper=$HOME/Pictures
 suckless_location=$HOME/.dotfiles/suckless
+crontab_file_location=$HOME/install/crontab_file
 
 #packages to be installed
 install_program()
 {
-    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom pulseaudio pulseaudio-alsa xorg xorg-xinit dunst libnotify ttf-font-awesome numlockx networkmanager network-manager-applet curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp youtube-dl scrot i3lock imagemagick wget ttf-roboto sxhkd cups cups-pdf sane ttf-jetbrains-mono neovim hunspell hunspell-en_us hyphen hyphen-en libmythes mythes-en
+    sudo pacman -S dmenu vlc firefox tor libreoffice-fresh clamav feh picom xorg xorg-xinit dunst libnotify ttf-font-awesome numlockx networkmanager network-manager-applet curl cronie graphicsmagick mariadb php apache php-apache phpmyadmin picom transmission-gtk ufw virtualbox virtualbox-guest-utils htop scrot zathura zathura-pdf-mupdf xclip openssh mpv xorg-xbacklight python-setuptools python2-setuptools gimp scrot i3lock imagemagick wget ttf-roboto sxhkd cups cups-pdf sane ttf-jetbrains-mono neovim hunspell hunspell-en_us hyphen hyphen-en libmythes mythes-en polybar vifm yt-dlp scrcpy pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber helvum
 }
 
 #create the necessary directories for where the files will go
@@ -77,6 +78,24 @@ create_links()
     done
 }
 
+#enable parallel downloads
+sed -i '/ParallelDownloads/s/^#//g' /etc/pacman.conf
+
+#enable colors
+sed -i '/Color/s/^#//g' /etc/pacman.conf
+
+#use pacman
+echo "ILoveCandy" >> /etc/pacman.conf
+
+#make a backup of the default mirrorlist
+sudo cp /etc/pacman.d/mirrorlist $HOME/mirrorlist_backup
+
+#install reflector
+sudo pacman -S reflector
+
+#run reflector
+reflector --latest 200 --sort rate --save /etc/pacman.d/mirrorlist
+
 install_program
 
 # create all the necessary directories first
@@ -100,7 +119,13 @@ cd $HOME/yay
 makepkg -si
 cd
 
-yay -S dwm vifm-git python-ueberzug-git st simple-mtpfs brave-bin scrcpy brscan4 sane-airscan polybar minecraft-launcher libreoffice-extension-languagetool
+#get MultiMC
+git clone https://github.com/MultiMC/multimc-pkgbuild.git
+cd $HOME/multimc-pkgbuild
+makepkg -si
+cd
+
+yay -S python-ueberzug-git st simple-mtpfs brave-bin brscan4 sane-airscan libreoffice-extension-languagetool
 
 cd $suckless_location/dwm
 sudo make install
@@ -126,13 +151,30 @@ sudo make install
 make clean
 cd
 
-# get vim-plug for neovim
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+#default to deny any incoming
+sudo ufw default deny incoming
 
+#default to allow any outgoing
+sudo ufw default allow outgoing
+
+#enable ufw
+sudo ufw enable
+
+#enable services
 sudo systemctl enable NetworkManager.service
 sudo systemctl enable cups.service
 sudo systemctl enable avahi-daemon.service
+sudo systemctl enable paccache.timer
+sudo systemctl enable fstrim.timer
+sudo systemctl enable fstrim.service
+sudo systemctl enable ufw.service
+sudo systemctl enable cronie.service
+sudo systemctl enable pipewire.socket
+sudo systemctl enable pipewire-pulse.socket
+sudo systemctl enable wireplumber.service
+
+#edit crontab tasks
+crontab $crontab_file_location
 
 #restart for changes to take place
 
